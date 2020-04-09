@@ -12,6 +12,8 @@ namespace ConsoleApp1
             double[] temp0= { 1013,900,500};
             double[,] tabH=new double[k,temp0.Length];
             double[,] tabHKreska = new double[k,temp0.Length];
+            double[,] tabHDaszek = new double[k, temp0.Length];
+            double[,] tabH2Kreska = new double[k, temp0.Length];
 
             for (int i = 0; i < temp0.Length; i++)
                 tabH[0,i] = cS*roS*tempKrzep+cL*roL*(temp0[i]-tempKrzep)+L*roS;
@@ -23,9 +25,14 @@ namespace ConsoleApp1
                 Console.Write("{0} ", tabHKreska[0,i]);
             Console.WriteLine("");
 
+            for (int i = 0; i < temp0.Length; i++)
+                tabHDaszek[0, i] = tabHKreska[0, i];
 
             for (int i = 0; i < temp0.Length; i++)
-                tabHKreska[0,i] = Math.Max(tabH[0,i], entalpiaL);
+                tabH2Kreska[0,i] = Math.Min(tabHDaszek[0,i], entalpiaS);
+
+            for (int i = 0; i < temp0.Length; i++)
+                Console.Write("{0} ", tabH2Kreska[0, i]);
 
 
             Console.ReadKey();
