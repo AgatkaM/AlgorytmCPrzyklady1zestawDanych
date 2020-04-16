@@ -141,17 +141,17 @@ namespace ConsoleApp1
                 }
             }
 
-            double tabX0;
-            float[] tabA = { 0, 3, 1, 1, 2 };
-            float[] tabB = { 2, 1, 2, 1, 2 };
-            float[] tabC = { 2, 1, 4, 1, 0 };
-            float[] tabD = { 2, 6, 4, 1, 7 };
+            double[] tabX0;
+            double[] tabA = { 0, 3, 1, 1, 2 };
+            double[] tabB = { 2, 1, 2, 1, 2 };
+            double[] tabC = { 2, 1, 4, 1, 0 };
+            double[] tabD = { 2, 6, 4, 1, 7 };
 
 
             funkcje.MetodaThomasa t = new funkcje.MetodaThomasa();
 
             tabX0 = t.nowa(tabA, tabB, tabC, tabD);
-            Console.Write(tabX0);
+            Console.Write(tabX0[0]);
 
             Console.ReadKey();
 

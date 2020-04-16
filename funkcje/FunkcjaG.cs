@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace ConsoleApp4
+namespace funkcje
 {
-    class Program
+    class FunkcjaG
     {
-        static void Main(string[] args)
+       /* static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-        }
+        }*/
     }
 }

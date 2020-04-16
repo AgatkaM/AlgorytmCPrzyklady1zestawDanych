@@ -40,7 +40,7 @@ namespace funkcje
         }
     }
 
-    class Program
+  /*  class Program
     {
         static void Main(string[] args)
         {
@@ -59,5 +59,5 @@ namespace funkcje
             Console.ReadKey();
 
         }
-    }
+    }*/
 }

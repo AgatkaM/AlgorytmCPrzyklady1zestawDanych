@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleApp3
+namespace funkcje
 {
 
     class Temperatura
@@ -26,7 +26,7 @@ namespace ConsoleApp3
         }
 
     }
-    class Program
+  /*  class Program
     {
         static void Main(string[] args)
         {
@@ -38,5 +38,5 @@ namespace ConsoleApp3
             
             Console.WriteLine(temp);
         }
-    }
+    }*/
 }
