@@ -8,15 +8,24 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            double cS=1000, cL=1290, roS=2679, roL=2380, L=390000, tempKrzep=930, u0=1013,uI=200,lambdaL=104,lambdaS=240;
-            int lbIteracji = 10;
+            double cS=690, cL=800, roS=7500, roL=7000, L=270000, tempKrzep=1773, u0=1813,uI=323,lambdaL=104,lambdaS=240;
+            int lbIteracji = 150;
             double a,stalaA,stalaSigma;
-            double entalpiaL = 3000000000, entalpiaS = 250000000;
-            double b = 10,tGwiazdka=100;
+            double entalpiaL = 10453590000, entalpiaS = 8563590000;
+            double b = 0.08,tGwiazdka=10;
             double alfa=0.5;
-            
-            double[] temp0= { 200,200,200,200}; 
-            int n = temp0.Length;
+
+            //double[] temp0= { 50,50,50,50,50}; 
+            //int n = temp0.Length;
+
+            int n = 10;
+            double[] temp0 = new double[n];
+
+            for(int i=0;i<n;i++)
+            {
+                temp0[i] = uI;
+            }
+            temp0[0] = tempKrzep;
             double[] aVec = new double[n];
             double[] bVec = new double[n];
             double[] cVec = new double[n];
@@ -55,9 +64,9 @@ namespace ConsoleApp1
                 }
 
 
-            Console.Write("tabH0: ");
+            /*Console.Write("tabH0: ");
             for (int i = 0; i < n; i++)
-                Console.Write("{0} ", tabH[0, i]);
+                Console.Write("{0} ", tabH[0, i]);*/
     
 
             stalaSigma = 1 / (SpecialFunction.gamma(0.5) * (1 - alfa) * Math.Pow(deltaT, alfa)); /* wartość funkcji sigma */
@@ -73,10 +82,10 @@ namespace ConsoleApp1
                 for (int i = 0; i < temp0.Length; i++)
                     tabHKreska[j-1, i] = Math.Max(tabH[j-1, i], entalpiaL);
 
-                Console.WriteLine(" ");
-                Console.Write("tabHKreska: ");
-                for (int i = 0; i < n; i++)
-                    Console.Write("{0} ", tabHKreska[j-1, i]);
+                //Console.WriteLine(" ");
+                //Console.Write("tabHKreska: ");
+                //for (int i = 0; i < n; i++)
+                //    Console.Write("{0} ", tabHKreska[j-1, i]);
 
                 aVec[0] = 0;
                 for (int i = 1; i < n - 1; i++)
@@ -113,19 +122,19 @@ namespace ConsoleApp1
                 for (int i = 0; i < n; i++)
                     tabHDaszek[j, i] = wynikThomas[i];
 
-                Console.WriteLine(" ");
-                Console.Write("tabHDaszek wyznaczone z Thomasa: ");
-                for (int i = 0; i < n; i++)
-                    Console.Write("{0} ", tabHDaszek[j, i]);
+                //Console.WriteLine(" ");
+                //Console.Write("tabHDaszek wyznaczone z Thomasa: ");
+                //for (int i = 0; i < n; i++)
+                //    Console.Write("{0} ", tabHDaszek[j, i]);
 
 
                 for (int i = 0; i < n; i++)
                     tabHKreska[j,i]=tabHDaszek[j, i]+(tabH[j-1,i]-tabHKreska[j-1,i]); /* korekta entalpii */
 
-                Console.WriteLine(" ");
+               /* Console.WriteLine(" ");
                 Console.Write("tabHKreska po korekcie: ");
                 for (int i = 0; i < n; i++)
-                    Console.Write("{0} ", tabHKreska[j, i]);
+                    Console.Write("{0} ", tabHKreska[j, i]); */
 
 
                 a = lambdaS / (cS * roS); /* Etap 2b: sprowadzamy całość do fazy stałej  */
@@ -133,10 +142,10 @@ namespace ConsoleApp1
                 for (int i = 0; i < n; i++)
                     tabH2Kreska[j-1, i] = Math.Min(tabHDaszek[j, i], entalpiaS);
 
-                Console.WriteLine(" ");
-                Console.Write("tabH2Kreska (minimum): ");
-                for (int i = 0; i < n; i++)
-                    Console.Write("{0} ", tabH2Kreska[j-1, i]);
+                //Console.WriteLine(" ");
+                //Console.Write("tabH2Kreska (minimum): ");
+                //for (int i = 0; i < n; i++)
+                //    Console.Write("{0} ", tabH2Kreska[j-1, i]);
 
                 aVec[0] = 0;
                 for (int i = 1; i < n - 1; i++)
@@ -174,38 +183,50 @@ namespace ConsoleApp1
                 for (int i = 0; i < n; i++)
                     tabH2Daszek[j , i] = wynikThomas[i];
 
-                Console.WriteLine(" ");
-                Console.Write("tabH2Daszek z thomasa: ");
-                for (int i = 0; i < n; i++)
-                    Console.Write("{0} ", tabH2Daszek[j, i]);
+                //Console.WriteLine(" ");
+               // Console.Write("tabH2Daszek z thomasa: ");
+               // for (int i = 0; i < n; i++)
+                   // Console.Write("{0} ", tabH2Daszek[j, i]);
 
                 for (int i = 0; i < n; i++)
                     tabH[j, i] = tabH2Daszek[j, i] + (tabHKreska[j, i] - tabH2Kreska[j-1, i]); /* korekta */
 
-                Console.WriteLine(" ");
-                Console.Write("tabH po korekcie: ");
-                for (int i = 0; i < n; i++)
-                {
-                    Console.Write("{0} ", tabH[j, i]);
-                }
+                //Console.WriteLine(" ");
+                //Console.Write("tabH po korekcie: ");
+                //for (int i = 0; i < n; i++)
+                //{
+                //    Console.Write("{0} ", tabH[j, i]);
+                //}
 
-                Console.WriteLine(" ");
-                Console.Write("temp tabH: ");
-                for (int i = 0; i < n; i++)
-                {
-                    Console.Write("{0} ", tempZEntalpii.temperatura(tabH[j, i]));
-                }
+                //Console.WriteLine(" ");
+                //Console.Write("temp tabH: ");
+                //for (int i = 0; i < n; i++)
+                //{
+                //    Console.Write("{0} ", tempZEntalpii.temperatura(tabH[j, i]));
+                //}
 
-                Console.WriteLine(" ");
+                //Console.WriteLine(" ");
 
                 for(int i=0;i<n;i++)
                 {
-                    if(tempZEntalpii.temperatura(tabH[j,i])==tempKrzep&&tempZEntalpii.temperatura(tabH[j-1,i])!=tempKrzep)
+                    if(tabH[j,i]>entalpiaS&&tabH[j-1,i]<=entalpiaS)
                     {
                     tabTx[i]=j;
                     }
 
                 }
+            }
+
+            Console.Write("tabH: ");
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write("{0} ", tabH[lbIteracji-1, i]);
+            }
+
+            Console.Write("temp tabH: ");
+            for (int i = 0; i < n; i++)
+            {
+                Console.Write("{0} ", tempZEntalpii.temperatura(tabH[lbIteracji - 1, i], tempKrzep, cL, roL, cS, roS, L, entalpiaL, entalpiaS));
             }
 
             Console.Write("Wartość tabTx:");
@@ -214,10 +235,10 @@ namespace ConsoleApp1
                 
                 Console.Write("{0} ", tabTx[i]);
             }
-
+             
             Console.WriteLine("");
 
-            temp = tempZEntalpii.temperatura(3000000000);
+            temp = tempZEntalpii.temperatura(entalpiaL, tempKrzep, cL, roL, cS, roS, L, entalpiaL, entalpiaS);
             Console.WriteLine("Wartosc temperatury: {0}",temp);
 
             wynikG = funkcjaG.g(n-1, tabTx[n-1], tabH, 3, stalaSigma, alfa, cL, cS, roL, roS);
