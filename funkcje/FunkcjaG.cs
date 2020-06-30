@@ -4,13 +4,14 @@ namespace funkcje
 {
     class FunkcjaG
     {
-        public double g(int x, int tx, double[,] tab, int t, double stalaSig, double alfa, double cL, double cS, double roL, double roS)
+        public double g(int x, int tx, double[,] tab, int t, double stalaSig, double alfa, double cL, double cS, double roL, double roS, double tempKrzep, double entalpiaL, double entalpiaS, double L)
         {
             funkcje.Temperatura tempZEntalpii = new funkcje.Temperatura();
 
             double g;
             double suma=0;
-            double tempKrzep = 1773,entalpiaL=10693590000,entalpiaS=8563590000,L=270000;
+            //double tempKrzep = 930, entalpiaL= 3536280000, entalpiaS= 2491470000, L= 390000;
+            //double tempKrzep = 1773, entalpiaL = 11200275000, entalpiaS = 9175275000, L = 270000;
 
             if (t > tx)
             {
@@ -23,6 +24,8 @@ namespace funkcje
             }
             else
                 g = 0;
+
+          
 
             return g;
         }

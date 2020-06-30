@@ -8,12 +8,14 @@ namespace ConsoleApp1
     {
         static void Main(string[] args)
         {
-            double cS=690, cL=800, roS=7500, roL=7000, L=270000, tempKrzep=1773, u0=2213,uI=323,lambdaL=104,lambdaS=240;
-            int lbIteracji = 5000;
+            //double cS= 1000, cL= 1290, roS= 2679, roL= 2380, L= 390000, tempKrzep= 930, u0= 1213, uI= 298, lambdaL=104,lambdaS= 240;
+            double cS = 690, cL = 800, roS = 7500, roL = 7000, L = 270000, tempKrzep = 1773, u0 = 2213, uI = 323, lambdaL = 33, lambdaS = 30;
+            int lbIteracji = 1000;
             double a,stalaA,stalaSigma;
-            double entalpiaL = 11200275000, entalpiaS = 9175275000;
+            double entalpiaL = 11818800000, entalpiaS = 9928800000;
+            //double entalpiaL = 11200275000, entalpiaS = 9175275000;
             double b = 0.08,tGwiazdka=100;
-            double alfa=0.5;
+            double alfa=0.99;
             int granica = 0;
             
 
@@ -40,10 +42,10 @@ namespace ConsoleApp1
             double[,] tabH2Kreska = new double[lbIteracji+1, n];
             double[,] tabH2Daszek = new double[lbIteracji + 1, n];
             int[] tabTx = new int[n]; /*tablica, w której zapisane są czasy tx topnienia dla danego punktu x*/ 
-            double deltaX = b / n,deltaT=0.1;
+            double deltaX = b / n,deltaT=1;
             double suma=0;
             int j = 1;
-            int l = 5;
+            int l = 10;
             double[] temperatury = new double[n];
 
 
@@ -126,7 +128,7 @@ namespace ConsoleApp1
                         suma = suma + (Math.Pow(it, 1 - alfa) - Math.Pow(it - 1, 1 - alfa)) * (tabHKreska[j-it+1, i]-tabHKreska[j-it,i]);
                     }
 
-                    dVec[i] = stalaSigma * tabHKreska[j-1, i] - stalaSigma * suma+ cL*roL*funkcjaG.g(i, tabTx[i], tabHKreska, j, stalaSigma, alfa, cL, cS, roL, roS);
+                    dVec[i] = stalaSigma * tabHKreska[j-1, i] - stalaSigma * suma+ cL*roL*funkcjaG.g(i, tabTx[i], tabHKreska, j, stalaSigma, alfa, cL, cS, roL, roS, tempKrzep, entalpiaL, entalpiaS, L);
                 }
                 
 
@@ -192,7 +194,7 @@ namespace ConsoleApp1
                         suma = suma + (Math.Pow(it, 1 - alfa) - Math.Pow(it - 1, 1 - alfa)) * (tabH2Kreska[j - it + 1, i] - tabH2Kreska[j - it, i]);
                     }
                     
-                    dVec[i] = stalaSigma * tabH2Kreska[j-1, i] - stalaSigma * suma + cS * roS * funkcjaG.g(i, tabTx[i], tabH2Kreska, j, stalaSigma, alfa, cL, cS, roL, roS); ;
+                    dVec[i] = stalaSigma * tabH2Kreska[j-1, i] - stalaSigma * suma + cS * roS * funkcjaG.g(i, tabTx[i], tabH2Kreska, j, stalaSigma, alfa, cL, cS, roL, roS, tempKrzep, entalpiaL, entalpiaS, L); ;
                 }
 
                 dVec[n - 1] = cS * roS * uI;
@@ -300,7 +302,7 @@ namespace ConsoleApp1
             temp = tempZEntalpii.temperatura(entalpiaL, tempKrzep, cL, roL, cS, roS, L, entalpiaL, entalpiaS);
             Console.WriteLine("Wartosc temperatury: {0}",temp);
 
-            wynikG = funkcjaG.g(n-1, tabTx[n-1], tabH, 3, stalaSigma, alfa, cL, cS, roL, roS);
+            wynikG = funkcjaG.g(n-1, tabTx[n-1], tabH, 3, stalaSigma, alfa, cL, cS, roL, roS, tempKrzep, entalpiaL, entalpiaS, L);
             Console.WriteLine("Wartość g: {0} ",wynikG);
 
             Console.WriteLine("Wartość funkcji gamma: {0} ", SpecialFunction.gamma(0.5));
