@@ -10,8 +10,7 @@ namespace funkcje
 
             double g;
             double suma=0;
-            //double tempKrzep = 930, entalpiaL= 3536280000, entalpiaS= 2491470000, L= 390000;
-            //double tempKrzep = 1773, entalpiaL = 11200275000, entalpiaS = 9175275000, L = 270000;
+            
 
             if (t > tx)
             {
@@ -20,7 +19,7 @@ namespace funkcje
                     suma = suma + (Math.Pow(it, 1 - alfa) - Math.Pow(it - 1, 1 - alfa)) * (tempZEntalpii.temperatura(tab[tx-it+1,x], tempKrzep, cL, roL, cS, roS, L, entalpiaL, entalpiaS) -tempZEntalpii.temperatura(tab[tx-it,x], tempKrzep, cL, roL, cS, roS, L, entalpiaL, entalpiaS));
                 }
 
-                g = ((cL * roL) / (cS * roS) - 1) * stalaSig * suma;
+                g = ((cS * roS) / (cL * roL) - 1) * stalaSig * suma;
             }
             else
                 g = 0;
