@@ -6,12 +6,12 @@ namespace funkcje
     class Temperatura
     {
         double temp;
-        public double temperatura(double entalpia,double temperaturaKrzepniecia, double cL,double roL,double cS, double roS, double L, double entalpiaL, double entalpiaS)
+        public double temperatura(double entalpia,double temperaturaKrzepniecia, double cL,double roL,double cS, double roS, double kappa, double entalpiaL, double entalpiaS)
         {
 
             if (entalpia > entalpiaL)
             {
-                temp = temperaturaKrzepniecia + 1 / (cL * roL) * (entalpia - cS * roS * temperaturaKrzepniecia - L * roS);
+                temp = temperaturaKrzepniecia + 1 / (cL * roL) * (entalpia - cS * roS * temperaturaKrzepniecia - kappa);
             } 
             else if (entalpia < entalpiaS)
             {

@@ -6,13 +6,13 @@ namespace funkcje
     class Entalpia
     {
         double temp;
-        public double entalpia(double temperatura,double temperaturaKrzepniecia, double cL,double roL,double cS, double roS, double L)
+        public double entalpia(double temperatura,double temperaturaKrzepniecia, double cL,double roL,double cS, double roS, double kappa)
         {
             double ent;
 
             if (temperatura > temperaturaKrzepniecia)
             {
-                ent = cL * roL * (temperatura - temperaturaKrzepniecia) + cS * roS * temperaturaKrzepniecia + L * roS;
+                ent = cL * roL * (temperatura - temperaturaKrzepniecia) + cS * roS * temperaturaKrzepniecia + kappa;
             } 
             else 
             {
